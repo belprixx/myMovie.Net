@@ -12,7 +12,13 @@ namespace WebApp.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+             HttpResponseMessage response = await client.GetAsync('api/values');
+            if (response.IsSuccessStatusCode)
+            {
+                testApi = await response.Content.ReadAsAsync<Product>();
+            }
+            return product;
+            return View(testApi);
         }
 
         public IActionResult About()
