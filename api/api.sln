@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api", "api\api.csproj", "{AF37566F-1556-4777-B88D-1C09FB90ED96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webApp", "..\webApp\webApp\webApp.csproj", "{6F59F028-7940-4684-B2E8-877A8533FD20}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF37566F-1556-4777-B88D-1C09FB90ED96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF37566F-1556-4777-B88D-1C09FB90ED96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF37566F-1556-4777-B88D-1C09FB90ED96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF37566F-1556-4777-B88D-1C09FB90ED96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F59F028-7940-4684-B2E8-877A8533FD20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F59F028-7940-4684-B2E8-877A8533FD20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F59F028-7940-4684-B2E8-877A8533FD20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F59F028-7940-4684-B2E8-877A8533FD20}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
