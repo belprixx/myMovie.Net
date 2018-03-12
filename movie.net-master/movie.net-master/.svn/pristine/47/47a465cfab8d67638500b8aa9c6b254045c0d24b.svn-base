@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="FilmSet" EntityType="Model1.Film" />
+    <EntitySet Name="UtilisateurSet" EntityType="Model1.Utilisateur" />
+    <EntitySet Name="AvisSet" EntityType="Model1.Avis" />
+    <AssociationSet Name="FilmAvis" Association="Model1.FilmAvis">
+      <End Role="Film" EntitySet="FilmSet" />
+      <End Role="Avis" EntitySet="AvisSet" />
+    </AssociationSet>
+    <AssociationSet Name="AvisUtilisateur" Association="Model1.AvisUtilisateur">
+      <End Role="Avis" EntitySet="AvisSet" />
+      <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Film">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Titre" Type="String" Nullable="false" />
+    <Property Name="Genre" Type="String" Nullable="false" />
+    <Property Name="Resume" Type="String" Nullable="false" />
+    <NavigationProperty Name="Avis" Relationship="Model1.FilmAvis" FromRole="Film" ToRole="Avis" />
+  </EntityType>
+  <EntityType Name="Utilisateur">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="login" Type="String" Nullable="false" />
+    <NavigationProperty Name="Avis" Relationship="Model1.AvisUtilisateur" FromRole="Utilisateur" ToRole="Avis" />
+  </EntityType>
+  <EntityType Name="Avis">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Note" Type="String" Nullable="false" />
+    <Property Name="Commentaire" Type="String" Nullable="false" />
+    <NavigationProperty Name="Film" Relationship="Model1.FilmAvis" FromRole="Avis" ToRole="Film" />
+    <NavigationProperty Name="Utilisateur" Relationship="Model1.AvisUtilisateur" FromRole="Avis" ToRole="Utilisateur" />
+  </EntityType>
+  <Association Name="FilmAvis">
+    <End Type="Model1.Film" Role="Film" Multiplicity="1" />
+    <End Type="Model1.Avis" Role="Avis" Multiplicity="*" />
+  </Association>
+  <Association Name="AvisUtilisateur">
+    <End Type="Model1.Avis" Role="Avis" Multiplicity="*" />
+    <End Type="Model1.Utilisateur" Role="Utilisateur" Multiplicity="1" />
+  </Association>
+</Schema>

@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="FilmSet" EntityType="Model1.Store.FilmSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UtilisateurSet" EntityType="Model1.Store.UtilisateurSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AvisSet" EntityType="Model1.Store.AvisSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FilmAvis" Association="Model1.Store.FilmAvis">
+      <End Role="Film" EntitySet="FilmSet" />
+      <End Role="Avis" EntitySet="AvisSet" />
+    </AssociationSet>
+    <AssociationSet Name="AvisUtilisateur" Association="Model1.Store.AvisUtilisateur">
+      <End Role="Avis" EntitySet="AvisSet" />
+      <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="FilmSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Titre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Genre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Resume" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UtilisateurSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="login" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AvisSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Commentaire" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Film_Id" Type="int" Nullable="false" />
+    <Property Name="Utilisateur_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FilmAvis">
+    <End Role="Film" Type="Model1.Store.FilmSet" Multiplicity="1" />
+    <End Role="Avis" Type="Model1.Store.AvisSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Film">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Avis">
+        <PropertyRef Name="Film_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AvisUtilisateur">
+    <End Role="Avis" Type="Model1.Store.AvisSet" Multiplicity="*" />
+    <End Role="Utilisateur" Type="Model1.Store.UtilisateurSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Avis">
+        <PropertyRef Name="Utilisateur_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FilmSet" EntityType="Model1.Film" />
+          <EntitySet Name="UtilisateurSet" EntityType="Model1.Utilisateur" />
+          <EntitySet Name="AvisSet" EntityType="Model1.Avis" />
+          <AssociationSet Name="FilmAvis" Association="Model1.FilmAvis">
+            <End Role="Film" EntitySet="FilmSet" />
+            <End Role="Avis" EntitySet="AvisSet" />
+          </AssociationSet>
+          <AssociationSet Name="AvisUtilisateur" Association="Model1.AvisUtilisateur">
+            <End Role="Avis" EntitySet="AvisSet" />
+            <End Role="Utilisateur" EntitySet="UtilisateurSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Film">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titre" Type="String" Nullable="false" />
+          <Property Name="Genre" Type="String" Nullable="false" />
+          <Property Name="Resume" Type="String" Nullable="false" />
+          <NavigationProperty Name="Avis" Relationship="Model1.FilmAvis" FromRole="Film" ToRole="Avis" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" Nullable="false" />
+          <NavigationProperty Name="Avis" Relationship="Model1.AvisUtilisateur" FromRole="Utilisateur" ToRole="Avis" />
+        </EntityType>
+        <EntityType Name="Avis">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Note" Type="String" Nullable="false" />
+          <Property Name="Commentaire" Type="String" Nullable="false" />
+          <NavigationProperty Name="Film" Relationship="Model1.FilmAvis" FromRole="Avis" ToRole="Film" />
+          <NavigationProperty Name="Utilisateur" Relationship="Model1.AvisUtilisateur" FromRole="Avis" ToRole="Utilisateur" />
+        </EntityType>
+        <Association Name="FilmAvis">
+          <End Type="Model1.Film" Role="Film" Multiplicity="1" />
+          <End Type="Model1.Avis" Role="Avis" Multiplicity="*" />
+        </Association>
+        <Association Name="AvisUtilisateur">
+          <End Type="Model1.Avis" Role="Avis" Multiplicity="*" />
+          <End Type="Model1.Utilisateur" Role="Utilisateur" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="FilmSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Film)">
+        <MappingFragment StoreEntitySet="FilmSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Titre" ColumnName="Titre" />
+          <ScalarProperty Name="Genre" ColumnName="Genre" />
+          <ScalarProperty Name="Resume" ColumnName="Resume" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UtilisateurSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Utilisateur)">
+        <MappingFragment StoreEntitySet="UtilisateurSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="login" ColumnName="login" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AvisSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Avis)">
+        <MappingFragment StoreEntitySet="AvisSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FilmAvis" TypeName="Model1.FilmAvis" StoreEntitySet="AvisSet">
+      <EndProperty Name="Film">
+        <ScalarProperty Name="Id" ColumnName="Film_Id" />
+      </EndProperty>
+      <EndProperty Name="Avis">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AvisUtilisateur" TypeName="Model1.AvisUtilisateur" StoreEntitySet="AvisSet">
+      <EndProperty Name="Utilisateur">
+        <ScalarProperty Name="Id" ColumnName="Utilisateur_Id" />
+      </EndProperty>
+      <EndProperty Name="Avis">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
-namespace MovieNetWpf
+namespace MovieNetWpf 
 {
 	public class MainViewModel : ViewModelBase
 	{

@@ -8,8 +8,11 @@
 		DataContext="{Binding Source={StaticResource VMLocator}, Path=MainVM}"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-		<Label Name="Label1" Content="{Binding Name}" HorizontalAlignment="Left" Height="29" Margin="53,70,0,0" VerticalAlignment="Top" Width="188" FontFamily="Arial"/>
-		<Button Name="Button1" Command="{Binding MyCommand}" Content="Click Here" HorizontalAlignment="Left" Height="25" Margin="212,124,0,0" VerticalAlignment="Top" Width="71" />
+		<Label Name="Label1" Content="{Binding Name}" HorizontalAlignment="Left" Height="29" Margin="210,280,0,0" VerticalAlignment="Top" Width="188" FontFamily="Arial"/>
+		<Button Name="Button1" Command="{Binding MyCommand}" Content="Click Here" HorizontalAlignment="Left" Height="25" Margin="419,274,0,0" VerticalAlignment="Top" Width="71" />
+		<TextBox Name="identifiant" HorizontalAlignment="Left" Height="29" Margin="151,103,0,0" TextWrapping="Wrap" Text="Identifiant" VerticalAlignment="Top" Width="184" TextChanged="TextBox_TextChanged"/>
+		<TextBox Name="motDePasse" HorizontalAlignment="Left" Height="29" Margin="151,155,0,0" TextWrapping="Wrap" Text="Mot de passe" VerticalAlignment="Top" Width="184"/>
+		<Button Content="Login" HorizontalAlignment="Left" Height="31" Margin="151,206,0,0" VerticalAlignment="Top" Width="184"/>
 
 	</Grid>
 </Window>
